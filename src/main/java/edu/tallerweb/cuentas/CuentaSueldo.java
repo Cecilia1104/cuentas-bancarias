@@ -12,7 +12,6 @@ public class CuentaSueldo extends AbstractCuenta {
 	public CuentaSueldo() {
 		this.saldo = 0.0;
 	}
-	
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
@@ -24,7 +23,6 @@ public class CuentaSueldo extends AbstractCuenta {
 		}
 		this.saldo += monto;
 	}
-	
 	/**
 	 * No hay reglas adicionales para la extracción
 	 * @param monto a extraer
@@ -40,7 +38,6 @@ public class CuentaSueldo extends AbstractCuenta {
 		}
 		this.saldo -= monto;
 	}
-	
 	/**
 	 * Permite saber el saldo de la cuenta
 	 * @return el saldo de la cuenta

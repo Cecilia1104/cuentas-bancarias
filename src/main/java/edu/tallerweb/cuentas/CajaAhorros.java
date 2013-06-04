@@ -2,9 +2,9 @@ package edu.tallerweb.cuentas;
 
 public class CajaAhorros extends AbstractCuenta {
 	private Integer ce;
-	private Double adicional = 6.0;
+	private final Double adicional = 6.0;
 	private Double saldo;
-	private Integer limite = 6;
+	private final Integer limite = 6;
 
 	public CajaAhorros() {
 		this.saldo = 0.0;

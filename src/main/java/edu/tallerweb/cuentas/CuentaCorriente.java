@@ -5,7 +5,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal; // Es el que me brinda el banco
 	private Double descubierto; // ES el utilizado en la operacion
 	private Double comision;
-	private Double recargo;
+	private final Double recargo=0.05;
 	private Double deposito;
 
 	public CuentaCorriente(final Double descubiertoTotal) {
