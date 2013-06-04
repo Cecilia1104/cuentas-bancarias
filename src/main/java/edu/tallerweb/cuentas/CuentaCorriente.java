@@ -1,10 +1,11 @@
 package edu.tallerweb.cuentas;
 
 public class CuentaCorriente extends AbstractCuenta {
-
-	private Double descubiertoTotal;// Es el que me brinda el banco
-	private Double descubierto;// ES el utilizado en la operacion
+	private double saldo;
+	private Double descubiertoTotal; // Es el que me brinda el banco
+	private Double descubierto; // ES el utilizado en la operacion
 	private Double comision;
+	private Double recargo;
 	private Double deposito;
 
 	public CuentaCorriente(final Double descubiertoTotal) {
@@ -13,35 +14,36 @@ public class CuentaCorriente extends AbstractCuenta {
 
 	}
 
-	public void depositar(final Double monto) throws CuentaBancariaException {
-		if (monto < 0.0)
+	public void depositar(final Double monto) {
+		if (monto < 0.0) {
 			throw new CuentaBancariaException(
 					"Los depositos deben ser positivos");
-		else {
+		} else {
 			this.saldo = this.descubiertoTotal + monto;
 			deposito = monto;
 		}
 
 	}
 
-	public void extraer(final Double monto) throws CuentaBancariaException {
-		if (monto < 0.0)
+	public void extraer(final Double monto) {
+		if (monto < 0.0) {
 			throw new CuentaBancariaException(
 					"La cantidad a retirar debe ser positiva");
-		if (monto > this.saldo)
+		}
+		if (monto > this.saldo) {
 			throw new CuentaBancariaException(
 					"Los fondos son insuficientes para el retiro");
-		else {
-			descubierto = monto - deposito;// Descubierto usado
+		} else {
+			descubierto = monto - deposito; // Descubierto usado
 
-			comision = descubierto * 0.05;// Comision sobre el descubierto
+			comision = descubierto * recargo; // Comision sobre el descubierto
 												// usado
 
-			this.saldo -= monto;// Saldo + Descubierto disponible
+			this.saldo -= monto; // Saldo + Descubierto disponible
 
 		}
-		if (descubierto < 0.0) {// El monto es suficiente para la
-										// extraccion, no uso descubierto
+		if (descubierto < 0.0) { // El monto es suficiente para la
+									// extraccion, no uso descubierto
 			comision = 0.0;
 			descubierto = 0.0;
 		}

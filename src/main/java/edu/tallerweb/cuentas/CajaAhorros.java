@@ -3,23 +3,27 @@ package edu.tallerweb.cuentas;
 public class CajaAhorros extends AbstractCuenta {
 	private Integer ce;
 	private Double adicional;
+	private double saldo;
+	private Integer limite;
 
 	public CajaAhorros() {
 		this.saldo = 0.0;
 		this.ce = 0;
-		this.adicional = 6.0;
 
 	}
 
-	public void depositar(final Double monto) throws CuentaBancariaException {
+	public void depositar(final Double monto) {
 
-		if (monto < 0.0)
+		if (monto > 0.0) {
+			this.saldo += monto;
+
+		} else {
 			throw new CuentaBancariaException(
 					"Los depositos deber ser positivos");
-		this.saldo += monto;
+		}
 	}
 
-	public void extraer(final Double monto) throws CuentaBancariaException {
+	public void extraer(final Double monto) {
 		this.ce++;
 
 		if (monto < 0.0) {
@@ -30,12 +34,14 @@ public class CajaAhorros extends AbstractCuenta {
 			if (this.saldo > monto) {
 				this.saldo -= monto;
 
-				if (this.ce >= 6)
+				if (this.ce >= limite) {
 					this.saldo -= this.adicional;
 
-			} else
-				throw new CuentaBancariaException(
-						"Saldo insuficiente para realizar la extraccion");
+				} else {
+					throw new CuentaBancariaException(
+							"Saldo insuficiente para realizar la extraccion");
+				}
+			}
 		}
 	}
 
