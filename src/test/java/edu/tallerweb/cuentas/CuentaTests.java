@@ -50,22 +50,7 @@ public class CuentaTests {
 	@Test
 	public void queVerifiqueLaConsignaCaja() {
 		CajaAhorros cuenta = new CajaAhorros();
-		cuenta.depositar(4000.0);
-
-		Assert.assertEquals(
-				"al depositar $ 4000.0 en una cuenta vacia, tiene $ 4000.0",
-				4000.0, cuenta.getSaldo(), 0.0);
-
-		cuenta.extraer(500.0);
-
-		Assert.assertEquals(
-				"al extraer $ 500.0 de una cuenta con $ 4000.0 se obtienen $ 3500.0",
-				3500.0, cuenta.getSaldo(), 0.0);
-	}
-
-	@Test
-	public void queApartirDeLaSextaExtraccionSeCobreAdicional() {
-		CajaAhorros cuenta = new CajaAhorros();
+	
 		cuenta.depositar(3000.0);
 		Assert.assertEquals(
 				"al depositar $ 3000.0 en una cuenta vacia, tiene $ 3000.0",

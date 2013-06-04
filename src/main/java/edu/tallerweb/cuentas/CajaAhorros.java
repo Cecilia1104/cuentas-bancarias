@@ -2,9 +2,9 @@ package edu.tallerweb.cuentas;
 
 public class CajaAhorros extends AbstractCuenta {
 	private Integer ce;
-	private Double adicional;
+	private Double adicional = 6.0;
 	private Double saldo;
-	private Integer limite;
+	private Integer limite = 6;
 
 	public CajaAhorros() {
 		this.saldo = 0.0;
@@ -34,13 +34,13 @@ public class CajaAhorros extends AbstractCuenta {
 			if (this.saldo > monto) {
 				this.saldo -= monto;
 
-				if (this.ce >= limite) {
-					this.saldo -= this.adicional;
+			} else {
+				throw new CuentaBancariaException(
+						"Saldo insuficiente para realizar la extraccion");
+			}
+			if (this.ce >= limite) {
+				this.saldo -= adicional;
 
-				} else {
-					throw new CuentaBancariaException(
-							"Saldo insuficiente para realizar la extraccion");
-				}
 			}
 		}
 	}
