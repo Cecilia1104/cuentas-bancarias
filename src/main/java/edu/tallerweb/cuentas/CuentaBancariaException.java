@@ -1,8 +1,8 @@
 package edu.tallerweb.cuentas;
 
 /**
- * Esta clase representa todas las excepciones en tiempo de ejecución
- * de negocio que puedan darse en el proyecto
+ * Esta clase representa todas las excepciones en tiempo de ejecucion de negocio
+ * que puedan darse en el proyecto
  */
 public class CuentaBancariaException extends RuntimeException {
 
