@@ -134,7 +134,7 @@ public class CuentaTests {
 				500, cuenta.getSaldo(), 0.0);
 
 		Assert.assertEquals("y el descubierto utilizado es de $500.0", 500,
-				cuenta.getSaldodescubierto(), 0.0);
+				cuenta.getDescubierto(), 0.0);
 
 		Assert.assertEquals("y la comision es de $25.0", 25,
 				cuenta.getComision(), 0.0);

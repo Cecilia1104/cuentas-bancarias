@@ -3,7 +3,7 @@ package edu.tallerweb.cuentas;
 public class CuentaCorriente extends AbstractCuenta {
 
 	private Double descubiertoTotal;// Es el que me brinda el banco
-	private Double saldodescubierto;// ES el utilizado en la operacion
+	private Double descubierto;// ES el utilizado en la operacion
 	private Double comision;
 	private Double deposito;
 
@@ -32,18 +32,18 @@ public class CuentaCorriente extends AbstractCuenta {
 			throw new CuentaBancariaException(
 					"Los fondos son insuficientes para el retiro");
 		else {
-			saldodescubierto = monto - deposito;// Descubierto usado
+			descubierto = monto - deposito;// Descubierto usado
 
-			comision = saldodescubierto * 0.05;// Comision sobre el descubierto
+			comision = descubierto * 0.05;// Comision sobre el descubierto
 												// usado
 
 			this.saldo -= monto;// Saldo + Descubierto disponible
 
 		}
-		if (saldodescubierto < 0.0) {// El monto es suficiente para la
+		if (descubierto < 0.0) {// El monto es suficiente para la
 										// extraccion, no uso descubierto
 			comision = 0.0;
-			saldodescubierto = 0.0;
+			descubierto = 0.0;
 		}
 
 	}
@@ -52,8 +52,8 @@ public class CuentaCorriente extends AbstractCuenta {
 		return this.saldo;
 	}
 
-	public Double getSaldodescubierto() {
-		return saldodescubierto;
+	public Double getDescubierto() {
+		return descubierto;
 
 	}
 
