@@ -1,7 +1,7 @@
 package edu.tallerweb.cuentas;
 
 public class CuentaCorriente extends AbstractCuenta {
-	private double saldo;
+	private Double saldo;
 	private Double descubiertoTotal; // Es el que me brinda el banco
 	private Double descubierto; // ES el utilizado en la operacion
 	private Double comision;

@@ -1,7 +1,7 @@
 package edu.tallerweb.cuentas;
 
 public class CuentaSueldo extends AbstractCuenta {
-	private double saldo;
+	private Double saldo;
 
 	public CuentaSueldo() {
 		this.saldo = 0.0;

@@ -3,7 +3,7 @@ package edu.tallerweb.cuentas;
 public class CajaAhorros extends AbstractCuenta {
 	private Integer ce;
 	private Double adicional;
-	private double saldo;
+	private Double saldo;
 	private Integer limite;
 
 	public CajaAhorros() {
