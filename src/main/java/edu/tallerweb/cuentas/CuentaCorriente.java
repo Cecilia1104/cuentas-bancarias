@@ -4,9 +4,10 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double saldo;
 	private Double descubiertoTotal; // Es el que me brinda el banco
 	private Double descubierto; // ES el utilizado en la operacion
-	private Double comision;
-	private final Double recargo=0.05;
-	private Double deposito;
+	public Double descubiertofinal; // Es el descubierto mas la comision
+	private final Double comision = 0.05;
+
+	public Double total;
 
 	public CuentaCorriente(final Double descubiertoTotal) {
 		this.descubiertoTotal = descubiertoTotal;
@@ -15,12 +16,14 @@ public class CuentaCorriente extends AbstractCuenta {
 	}
 
 	public void depositar(final Double monto) {
+
 		if (monto < 0.0) {
 			throw new CuentaBancariaException(
 					"Los depositos deben ser positivos");
 		} else {
-			this.saldo = this.descubiertoTotal + monto;
-			deposito = monto;
+			this.saldo = monto;
+			total = this.descubiertoTotal + monto;
+
 		}
 
 	}
@@ -30,22 +33,23 @@ public class CuentaCorriente extends AbstractCuenta {
 			throw new CuentaBancariaException(
 					"La cantidad a retirar debe ser positiva");
 		}
-		if (monto > this.saldo) {
-			throw new CuentaBancariaException(
-					"Los fondos son insuficientes para el retiro");
+		if (monto < this.saldo) {
+			this.saldo -= monto;
 		} else {
-			descubierto = monto - deposito; // Descubierto usado
 
-			comision = descubierto * recargo; // Comision sobre el descubierto
-												// usado
+			if (monto < total) {
 
-			this.saldo -= monto; // Saldo + Descubierto disponible
+				descubierto = (monto - this.saldo);
 
-		}
-		if (descubierto < 0.0) { // El monto es suficiente para la
-									// extraccion, no uso descubierto
-			comision = 0.0;
-			descubierto = 0.0;
+				descubiertofinal = descubierto + (descubierto * comision);
+
+				this.saldo = 0.0;
+
+			} else {
+				throw new CuentaBancariaException(
+						"Saldo insuficiente para realizar la operacion");
+			}
+
 		}
 
 	}
@@ -55,11 +59,8 @@ public class CuentaCorriente extends AbstractCuenta {
 	}
 
 	public Double getDescubierto() {
-		return descubierto;
+		return descubiertofinal;
 
 	}
 
-	public Double getComision() {
-		return comision;
-	}
 }

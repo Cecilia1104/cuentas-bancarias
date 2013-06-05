@@ -50,7 +50,7 @@ public class CuentaTests {
 	@Test
 	public void queVerifiqueLaConsignaCaja() {
 		CajaAhorros cuenta = new CajaAhorros();
-	
+
 		cuenta.depositar(3000.0);
 		Assert.assertEquals(
 				"al depositar $ 3000.0 en una cuenta vacia, tiene $ 3000.0",
@@ -103,26 +103,40 @@ public class CuentaTests {
 
 	// Cuenta Corriente
 	@Test
+	public void queSePuedeDepositarEnUnaCuentaCorriente() {
+		CuentaCorriente cuenta = new CuentaCorriente(0.0);
+		cuenta.depositar(1000.0);
+
+		Assert.assertEquals(
+				"al depositar $ 1000.0 en una cuenta vacia, tiene $ 1000.0",
+				1000.0, cuenta.getSaldo(), 0.0);
+	}
+
+	@Test
+	public void queSePuedeExtraerEnUnaCuentaCorriente() {
+		CuentaCorriente cuenta = new CuentaCorriente(0.0);
+		cuenta.depositar(1000.0);
+		cuenta.extraer(100.0);
+		Assert.assertEquals(
+				"al extraer $ 100.0 en una cuenta con $1000.0, tiene $ 900.0",
+				900.0, cuenta.getSaldo(), 0.0);
+	}
+
+	@Test
 	public void queVerifiqueLaConsignaCorriente() {
-		CuentaCorriente cuenta = new CuentaCorriente(1000.0);
+		CuentaCorriente cuenta = new CuentaCorriente(500.0);
 
-		cuenta.depositar(4000.0);
+		cuenta.depositar(1000.0);
 
-		Assert.assertEquals(
-				"al depositar $ 4000.0 en una cuenta con un descubierto de $1000.0, tiene $ 5000.0",
-				5000.0, cuenta.getSaldo(), 0.0);
-
-		cuenta.extraer(4500.0);
+		cuenta.extraer(1100.0);
 
 		Assert.assertEquals(
-				"al extraer $ 4500.0 de una cuenta con $ 5000.0 me queda: $500 (saldo + descubierto disponible) ",
-				500, cuenta.getSaldo(), 0.0);
+				"al extraer $ 1100.0 de la cuenta me queda: $0 de saldo ", 0.0,
+				cuenta.getSaldo(), 0.0);
 
-		Assert.assertEquals("y el descubierto utilizado es de $500.0", 500,
+		Assert.assertEquals("y el descubierto utilizado es de $100.0 mas la comision", 105,
 				cuenta.getDescubierto(), 0.0);
 
-		Assert.assertEquals("y la comision es de $25.0", 25,
-				cuenta.getComision(), 0.0);
 	}
 
 	@Test(expected = CuentaBancariaException.class)
@@ -143,10 +157,11 @@ public class CuentaTests {
 	}
 
 	@Test(expected = CuentaBancariaException.class)
-	public void queVerifiqueLaConsignaExceptionNoPuedoExtraerConFondosInsuficientes() {
+	public void quequeNoSePuedeExtraerEnDescubiertoDeUnaCuentaCorrienteMasDelDisponibleConImpuesto() {
 		CuentaCorriente cuenta = new CuentaCorriente(1000.0);
 		cuenta.depositar(100.0);
 		cuenta.extraer(3000.0);
 
 	}
+
 }
