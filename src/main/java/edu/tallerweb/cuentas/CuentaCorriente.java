@@ -20,7 +20,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			throw new CuentaBancariaException(
 					"Los depositos deben ser positivos");
 		} else {
-			this.saldo = monto;
+			this.saldo += monto;
 			total = this.descubiertoTotal + monto;
 		}
 	}
