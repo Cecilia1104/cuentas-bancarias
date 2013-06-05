@@ -4,15 +4,14 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double saldo;
 	private Double descubiertoTotal; // Es el que me brinda el banco
 	private Double descubierto; // ES el utilizado en la operacion
-	public Double descubiertofinal; // Es el descubierto mas la comision
+	private Double descubiertofinal; // El que me queda para la prox operacion
+	private Double descubiertolibre;
 	private final Double comision = 0.05;
-
-	public Double total;
+	private Double total;
 
 	public CuentaCorriente(final Double descubiertoTotal) {
 		this.descubiertoTotal = descubiertoTotal;
 		this.saldo = 0.0;
-
 	}
 
 	public void depositar(final Double monto) {
@@ -23,12 +22,11 @@ public class CuentaCorriente extends AbstractCuenta {
 		} else {
 			this.saldo = monto;
 			total = this.descubiertoTotal + monto;
-
 		}
-
 	}
 
 	public void extraer(final Double monto) {
+
 		if (monto < 0.0) {
 			throw new CuentaBancariaException(
 					"La cantidad a retirar debe ser positiva");
@@ -38,20 +36,16 @@ public class CuentaCorriente extends AbstractCuenta {
 		} else {
 
 			if (monto < total) {
-
 				descubierto = (monto - this.saldo);
-
-				descubiertofinal = descubierto + (descubierto * comision);
-
+				descubiertolibre = this.descubiertoTotal - descubierto;
+				descubiertofinal = descubiertolibre - (descubierto * comision);
 				this.saldo = 0.0;
 
 			} else {
 				throw new CuentaBancariaException(
 						"Saldo insuficiente para realizar la operacion");
 			}
-
 		}
-
 	}
 
 	public Double getSaldo() {
@@ -60,7 +54,5 @@ public class CuentaCorriente extends AbstractCuenta {
 
 	public Double getDescubierto() {
 		return descubiertofinal;
-
 	}
-
 }

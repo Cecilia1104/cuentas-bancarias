@@ -134,7 +134,7 @@ public class CuentaTests {
 				"al extraer $ 1100.0 de la cuenta me queda: $0 de saldo ", 0.0,
 				cuenta.getSaldo(), 0.0);
 
-		Assert.assertEquals("y el descubierto utilizado es de $100.0 mas la comision", 105,
+		Assert.assertEquals("y el descubierto es de $395", 395,
 				cuenta.getDescubierto(), 0.0);
 
 	}
@@ -157,7 +157,7 @@ public class CuentaTests {
 	}
 
 	@Test(expected = CuentaBancariaException.class)
-	public void quequeNoSePuedeExtraerEnDescubiertoDeUnaCuentaCorrienteMasDelDisponibleConImpuesto() {
+	public void queNoSePuedeExtraerEnDescubiertoDeUnaCuentaCorrienteMasDelDisponibleConImpuesto() {
 		CuentaCorriente cuenta = new CuentaCorriente(1000.0);
 		cuenta.depositar(100.0);
 		cuenta.extraer(3000.0);
